@@ -24,8 +24,8 @@ public class CameraRaycaster : MonoBehaviour
         get { return m_layerHit; }
     }
 
-    public delegate void OnLayerChange(); // declare new delegate type
-    public OnLayerChange layerChangeObservers; // instantiate an observer set
+    public delegate void OnLayerChange(Layer layer); // declare new delegate type
+    public event OnLayerChange layerChangeObservers; // instantiate an observer set
 
     void Start() 
     {
@@ -49,7 +49,7 @@ public class CameraRaycaster : MonoBehaviour
                 if (m_layerHit != layer)
                 {
                     m_layerHit = layer;
-                    layerChangeObservers(); // call the delegates                  
+                    layerChangeObservers(m_layerHit); // call the delegates                  
                 }
                 
                 return;
@@ -59,7 +59,7 @@ public class CameraRaycaster : MonoBehaviour
         // Otherwise return background hit
         m_hit.distance = distanceToBackground;
         m_layerHit = Layer.RaycastEndStop;
-        layerChangeObservers(); // call the delegates 
+        layerChangeObservers(m_layerHit); // call the delegates 
     }
 
     RaycastHit? RaycastForLayer(Layer layer)
