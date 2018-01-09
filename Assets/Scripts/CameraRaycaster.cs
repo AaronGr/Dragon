@@ -2,6 +2,8 @@
 
 public class CameraRaycaster : MonoBehaviour
 {
+    private bool layerChanged = false;
+
     public Layer[] layerPriorities = {
         Layer.Enemy,
         Layer.Walkable
@@ -22,21 +24,34 @@ public class CameraRaycaster : MonoBehaviour
         get { return m_layerHit; }
     }
 
-    void Start() // TODO Awake?
+    public delegate void OnLayerChange(); // declare new delegate type
+    public OnLayerChange layerChangeObservers; // instantiate an observer set
+
+    void Start() 
     {
         viewCamera = Camera.main;
+
     }
 
     void Update()
     {
+   
+ 
         // Look for and return priority layer hit
         foreach (Layer layer in layerPriorities)
         {
+
             var hit = RaycastForLayer(layer);
             if (hit.HasValue)
             {
                 m_hit = hit.Value;
-                m_layerHit = layer;
+                //If a new layer is hit call the delegates
+                if (m_layerHit != layer)
+                {
+                    m_layerHit = layer;
+                    layerChangeObservers(); // call the delegates                  
+                }
+                
                 return;
             }
         }
@@ -44,6 +59,7 @@ public class CameraRaycaster : MonoBehaviour
         // Otherwise return background hit
         m_hit.distance = distanceToBackground;
         m_layerHit = Layer.RaycastEndStop;
+        layerChangeObservers(); // call the delegates 
     }
 
     RaycastHit? RaycastForLayer(Layer layer)
