@@ -1091,6 +1091,7 @@ GameObject:
   - component: {fileID: 136737560857369874}
   - component: {fileID: 114233226793426908}
   - component: {fileID: 114020118347813172}
+  - component: {fileID: 114523487722797342}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -2517,6 +2518,18 @@ MonoBehaviour:
   m_MoveSpeedMultiplier: 1.11
   m_AnimSpeedMultiplier: 1
   m_GroundCheckDistance: 0.3
+--- !u!114 &114523487722797342
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1883481057651886}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5355e74c5a7812479a1512faf6fa5a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealthPoints: 100
 --- !u!136 &136737560857369874
 CapsuleCollider:
   m_ObjectHideFlags: 1

@@ -19,7 +19,6 @@ public class CursorAffordance : MonoBehaviour {
 	}
 	
 	void OnLayerChange (Layer layer) {
-        print("Test");
         switch(layer) {
             case Layer.Walkable:
                 Cursor.SetCursor(walkCursor, cursorHotspot, CursorMode.Auto);
