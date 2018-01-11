@@ -80,7 +80,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &114218168241999132
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -179,7 +179,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 1
     y: 0
-    width: 0.5
+    width: 0.3
     height: 1
 --- !u!114 &114951094027350426
 MonoBehaviour:
