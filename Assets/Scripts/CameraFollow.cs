@@ -4,9 +4,15 @@ using UnityEngine;
 
 public class CameraFollow : MonoBehaviour {
 
-    public GameObject player;
+    private GameObject player;
 
-	void LateUpdate () {
+    private void Start()
+    {
+        player = GameObject.FindGameObjectWithTag("Player");
+    }
+
+    void LateUpdate () {
+       
         transform.position = player.transform.position;
 	}
 }

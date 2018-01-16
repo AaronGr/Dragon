@@ -38,8 +38,8 @@ GameObject:
   - component: {fileID: 20321442234937568}
   - component: {fileID: 124415904447041254}
   - component: {fileID: 81409738978193916}
-  - component: {fileID: 114966828286585104}
-  - component: {fileID: 114453369438080932}
+  - component: {fileID: 114028138803080452}
+  - component: {fileID: 114874834004271752}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -116,7 +116,7 @@ AudioListener:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1878707770949332}
   m_Enabled: 1
---- !u!114 &114453369438080932
+--- !u!114 &114028138803080452
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -124,24 +124,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1878707770949332}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ddd238199addee489e8fec7e18be142, type: 3}
+  m_Script: {fileID: 11500000, guid: d02853f5d34bd8f429969ac34c466d07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   layerPriorities: 0800000009000000
-  distanceToBackground: 100
---- !u!114 &114951094411269706
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1168352746859724}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dab0c7929fafcd24a80a7a0012d5afc0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 0}
---- !u!114 &114966828286585104
+--- !u!114 &114874834004271752
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -156,6 +143,17 @@ MonoBehaviour:
   enemyCursor: {fileID: 2800000, guid: bc9fde6c4b04ea74b87107cb36dd8809, type: 3}
   debugCursor: {fileID: 2800000, guid: 313b49f1f9fc22a4f9fd133e909d9da6, type: 3}
   cursorHotspot: {x: 96, y: 96}
+--- !u!114 &114951094411269706
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1168352746859724}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dab0c7929fafcd24a80a7a0012d5afc0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!124 &124415904447041254
 Behaviour:
   m_ObjectHideFlags: 1

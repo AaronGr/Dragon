@@ -21,27 +21,7 @@ public class PlayerMovement : MonoBehaviour {
         currentDestination = transform.position;
     }
 
-    // Fixed update is called in sync with physics
-    private void FixedUpdate()
-    {
-        //G for gamepad. 
-        //TODO allow player to map later or add to menu
-        if (Input.GetKeyDown(KeyCode.G))
-        {
-            IsInDirectMode = !IsInDirectMode; //toggle mode
-            currentDestination = transform.position; // clear click target
-        }
-
-        if(IsInDirectMode)
-        {
-            ProcessDirectMovement();
-        } 
-        else
-        {
-            ProcessMouseMovement();
-        }
-
-    }
+   
 
     private void ProcessDirectMovement()
     {
@@ -60,27 +40,6 @@ public class PlayerMovement : MonoBehaviour {
         return destination - reductionVector;
     }
 
-    private void ProcessMouseMovement()
-    {
-        if (Input.GetMouseButton(0))
-        {
-            clickPoint = cameraRaycaster.hit.point;
-            if (cameraRaycaster.layerHit == Layer.Walkable)
-            {
-                currentDestination = ShortDestination(clickPoint, walkMoveStopRadius);
-            }
-        }
-
-        var playerToClickPoint = currentDestination - transform.position;
-        if (playerToClickPoint.magnitude >= 0)
-        {
-            thirdPersonCharacter.Move(playerToClickPoint, false, false);
-        }
-        else
-        {
-            thirdPersonCharacter.Move(Vector3.zero, false, false);
-        }
-    }
 
     private void OnDrawGizmos()
     {
