@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityStandardAssets.Characters.ThirdPerson;
 
-public class Enemy : MonoBehaviour {
+public class Enemy : MonoBehaviour, IDamagable {
 
     [SerializeField] float maxHealthPoints = 100f;
-    [SerializeField] float playerDetectionRadius = 5f;
+    [SerializeField] float attackRadius = 5f;
+    [SerializeField] float chaseRadius = 10f;
 
     private float currentHealthPoints = 100f;
     private ThirdPersonCharacter thirdPersonCharacter = null;
@@ -31,17 +32,32 @@ public class Enemy : MonoBehaviour {
         Vector3 distanceFromPlayer = transform.position - playerPosition;
 
         if (aiCharacterControl &&
-           Mathf.Abs(distanceFromPlayer.x) <= playerDetectionRadius &&
-           Mathf.Abs(distanceFromPlayer.y) <= playerDetectionRadius &&
-           Mathf.Abs(distanceFromPlayer.z) <= playerDetectionRadius)
+           Mathf.Abs(distanceFromPlayer.x) <= attackRadius &&
+           Mathf.Abs(distanceFromPlayer.y) <= attackRadius &&
+           Mathf.Abs(distanceFromPlayer.z) <= attackRadius)
+        {
+            print(gameObject.name + " attacking player");
+        }
+ 
+
+        if (aiCharacterControl &&
+           Mathf.Abs(distanceFromPlayer.x) <= chaseRadius &&
+           Mathf.Abs(distanceFromPlayer.y) <= chaseRadius &&
+           Mathf.Abs(distanceFromPlayer.z) <= chaseRadius)
         {
             aiCharacterControl.SetTarget(player.transform);
         }
-        else if(thirdPersonCharacter && aiCharacterControl)
+        else if (thirdPersonCharacter && aiCharacterControl)
         {
             aiCharacterControl.SetTarget(null);
             aiCharacterControl.agent.SetDestination(startingPosition);
         }
+
+    }
+
+    public void TakeDamage(float damage)
+    {
+        currentHealthPoints = Mathf.Clamp(currentHealthPoints - damage, 0f, maxHealthPoints);
     }
 
     /*
@@ -60,4 +76,15 @@ public class Enemy : MonoBehaviour {
         }
     }
 
+    private void OnDrawGizmos()
+    {
+
+        //Draw Attack Spheres
+        Gizmos.color = new Color(255f, 0f, 0, .5f);
+        Gizmos.DrawWireSphere(transform.position, attackRadius);
+
+        //Draw Move Spheres
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(transform.position, chaseRadius);
+    }
 }

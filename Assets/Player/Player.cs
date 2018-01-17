@@ -37,8 +37,6 @@ public class Player : MonoBehaviour, IDamagable {
 
     private void OnMouseClick(RaycastHit raycastHit, int layerHit)
     {
-        print("Raycast hit:  " + raycastHit + "\n" +
-              "Layer hit:  " + layerHit);
 
         switch(layerHit)
         {
