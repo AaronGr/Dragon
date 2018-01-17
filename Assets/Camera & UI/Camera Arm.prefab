@@ -127,7 +127,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d02853f5d34bd8f429969ac34c466d07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  layerPriorities: 0800000009000000
+  layerPriorities: 05000000080000000900000000000000
+  stringToPrint: Poop
 --- !u!114 &114874834004271752
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -141,7 +142,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   walkCursor: {fileID: 2800000, guid: 97dce9ca9ab6cc14f8ecb83c0feaee96, type: 3}
   enemyCursor: {fileID: 2800000, guid: bc9fde6c4b04ea74b87107cb36dd8809, type: 3}
-  debugCursor: {fileID: 2800000, guid: 313b49f1f9fc22a4f9fd133e909d9da6, type: 3}
+  defaultCursor: {fileID: 2800000, guid: 313b49f1f9fc22a4f9fd133e909d9da6, type: 3}
   cursorHotspot: {x: 96, y: 96}
 --- !u!114 &114951094411269706
 MonoBehaviour:

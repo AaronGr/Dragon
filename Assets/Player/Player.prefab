@@ -1092,6 +1092,8 @@ GameObject:
   - component: {fileID: 114233226793426908}
   - component: {fileID: 114020118347813172}
   - component: {fileID: 114523487722797342}
+  - component: {fileID: 195203234962508866}
+  - component: {fileID: 114853832379749208}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1339,7 +1341,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1158772666895252}
-  m_LocalRotation: {x: 0.6043668, y: 0.09732712, z: 0.7835786, w: -0.106173575}
+  m_LocalRotation: {x: 0.5326752, y: 0.070340455, z: 0.83613276, w: -0.110415146}
   m_LocalPosition: {x: 0.000022246646, y: -0.00006150933, z: 0.026027026}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1353,7 +1355,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1916483796713104}
-  m_LocalRotation: {x: -0.03955709, y: 0.026654173, z: -0.15735187, w: 0.98638994}
+  m_LocalRotation: {x: -0.039557092, y: 0.026654175, z: -0.15735188, w: 0.98639}
   m_LocalPosition: {x: -0.009746829, y: 0.022168988, z: 0.0138265565}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1480,7 +1482,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1666846864535160}
-  m_LocalRotation: {x: -0.004583177, y: 0.0061337203, z: 0.13444045, w: 0.99089205}
+  m_LocalRotation: {x: -0.0045831776, y: 0.0061337207, z: 0.13444047, w: 0.9908921}
   m_LocalPosition: {x: -0.35516807, y: -0.04777523, z: 0.03483508}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1623,9 +1625,9 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1883481057651886}
-  m_LocalRotation: {x: 0, y: -0.44024768, z: 0, w: -0.8978764}
-  m_LocalPosition: {x: 52, y: -0.0000023841858, z: -88}
-  m_LocalScale: {x: 2.8006742, y: 2.8006747, z: 2.8006747}
+  m_LocalRotation: {x: -0, y: -0.44024768, z: -0, w: -0.8978764}
+  m_LocalPosition: {x: 52, y: 0, z: -88}
+  m_LocalScale: {x: 2.800674, y: 2.8006747, z: 2.8006744}
   m_Children:
   - {fileID: 4797908717523210}
   - {fileID: 4002739067402482}
@@ -2020,7 +2022,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1845786814805838}
-  m_LocalRotation: {x: 0.027689116, y: 0.99927866, z: -0.020189239, w: 0.016364755}
+  m_LocalRotation: {x: 0.027689118, y: 0.9992787, z: -0.02018924, w: 0.016364757}
   m_LocalPosition: {x: 0.044804946, y: -0.0040023946, z: -0.07436281}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -2530,13 +2532,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealthPoints: 100
+  walkTarget: {fileID: 0}
+--- !u!114 &114853832379749208
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1883481057651886}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c5335f0882fe4d478883cc8c58ce906, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
 --- !u!136 &136737560857369874
 CapsuleCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1883481057651886}
-  m_Material: {fileID: 13400000, guid: c2815a7ab32e42c4bb42f59caacb8ec1, type: 2}
+  m_Material: {fileID: 13400000, guid: e52fb17f9b1e7fd48b8955f1391d3688, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.3
@@ -2717,3 +2732,24 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.0009998977, y: 0.007603839, z: 0.00028842688}
     m_Extent: {x: 0.80239844, y: 0.23826995, z: 0.5723474}
   m_DirtyAABB: 0
+--- !u!195 &195203234962508866
+NavMeshAgent:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1883481057651886}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 1
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 2
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
