@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityStandardAssets.Characters.ThirdPerson;
 
-public class Player : MonoBehaviour {
+public class Player : MonoBehaviour, IDamagable {
 
     [SerializeField] float maxHealthPoints = 100f;
 
@@ -28,6 +28,11 @@ public class Player : MonoBehaviour {
         {
             return currentHealthPoints / maxHealthPoints;
         }
+    }
+
+    public void TakeDamage(float damage)
+    {
+        currentHealthPoints = Mathf.Clamp(currentHealthPoints - damage, 0f, maxHealthPoints);
     }
 
     private void OnMouseClick(RaycastHit raycastHit, int layerHit)
