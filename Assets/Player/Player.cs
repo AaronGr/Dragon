@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityStandardAssets.Characters.ThirdPerson;
 
-[RequireComponent(typeof(WalkTarget))]
 public class Player : MonoBehaviour {
 
     [SerializeField] float maxHealthPoints = 100f;
