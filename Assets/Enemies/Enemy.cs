@@ -9,13 +9,15 @@ public class Enemy : MonoBehaviour, IDamagable {
     [SerializeField] float attackRadius = 5f;
     [SerializeField] float chaseRadius = 10f;
     [SerializeField] float damagePerShot = 10f;
-    [SerializeField] float secondsBetweenShots = 0.5f;
+    [SerializeField] float secondsBetweenShots = 0.5f;  //TODO switch to coroutines
+    [SerializeField] Vector3 aimOffset = new Vector3(0, 1f, 0);
     [SerializeField] GameObject projectileToUse;
     [SerializeField] GameObject projectileSocket;
+    
 
     public bool isAttacking = false;
 
-    private float currentHealthPoints = 100f;
+    private float currentHealthPoints;
     private ThirdPersonCharacter thirdPersonCharacter = null;
     private AICharacterControl aiCharacterControl = null;
     private GameObject player = null;
@@ -24,6 +26,10 @@ public class Enemy : MonoBehaviour, IDamagable {
     public void TakeDamage(float damage)
     {
         currentHealthPoints = Mathf.Clamp(currentHealthPoints - damage, 0f, maxHealthPoints);
+        if(currentHealthPoints <= 0)
+        {
+            Destroy(this.gameObject);
+        }
     }
 
     /*
@@ -44,6 +50,8 @@ public class Enemy : MonoBehaviour, IDamagable {
 
     private void Start()
     {
+        currentHealthPoints = maxHealthPoints;
+
         thirdPersonCharacter = GetComponent<ThirdPersonCharacter>();
         aiCharacterControl = GetComponent<AICharacterControl>();
         startingPosition = transform.position;
@@ -58,7 +66,13 @@ public class Enemy : MonoBehaviour, IDamagable {
         if (distanceToPlayer <= attackRadius && !isAttacking) 
         {
             isAttacking = true;
-            InvokeRepeating("SpawnProjectile", 0f, )
+            InvokeRepeating("SpawnProjectile", 0f, secondsBetweenShots);
+        }
+
+        if (attackRadius < distanceToPlayer)
+        {
+            isAttacking = false;
+            CancelInvoke();
         }
 
         if (distanceToPlayer <= chaseRadius)
@@ -80,7 +94,7 @@ public class Enemy : MonoBehaviour, IDamagable {
         Projectile projectileComponent = newProjectile.GetComponent<Projectile>();
         projectileComponent.damageCaused = damagePerShot;
 
-        Vector3 unitVectorToPlayer = (player.transform.position - projectileSocket.transform.position).normalized;
+        Vector3 unitVectorToPlayer = (player.transform.position + aimOffset - projectileSocket.transform.position).normalized;
         float projectileSpeed = projectileComponent.projectileSpeed;
         newProjectile.GetComponent<Rigidbody>().velocity = unitVectorToPlayer * projectileSpeed;
     }
