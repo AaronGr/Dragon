@@ -26,6 +26,7 @@ public class Enemy : MonoBehaviour, IDamagable {
     public void TakeDamage(float damage)
     {
         currentHealthPoints = Mathf.Clamp(currentHealthPoints - damage, 0f, maxHealthPoints);
+        print("Damage taken: " + damage + " Current Health: " + currentHealthPoints);
         if(currentHealthPoints <= 0)
         {
             Destroy(this.gameObject);

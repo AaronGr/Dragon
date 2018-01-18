@@ -2602,7 +2602,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealthPoints: 100
-  attackRadius: 9.21
+  attackRadius: 9
   chaseRadius: 28.5
   damagePerShot: 5
   secondsBetweenShots: 0.5
@@ -2807,7 +2807,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 6.52
+  m_Speed: 8.05
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120

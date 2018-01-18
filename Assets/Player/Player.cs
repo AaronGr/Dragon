@@ -56,6 +56,8 @@ public class Player : MonoBehaviour, IDamagable {
 
                 if(Time.time - lastHitTime > minTimeBetweenHit)
                 {
+
+                    lastHitTime = Time.time;
                     DoDamage();
                 }
                 break;
@@ -72,6 +74,7 @@ public class Player : MonoBehaviour, IDamagable {
         Component damagableComponent = currentTarget.GetComponent(typeof(IDamagable));
         if (damagableComponent)
         {
+            print("Doing " + meleeDamage + " to " + currentTarget);
             (damagableComponent as IDamagable).TakeDamage(meleeDamage);
         }
     }
