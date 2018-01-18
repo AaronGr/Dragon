@@ -8,53 +8,19 @@ public class Enemy : MonoBehaviour, IDamagable {
     [SerializeField] float maxHealthPoints = 100f;
     [SerializeField] float attackRadius = 5f;
     [SerializeField] float chaseRadius = 10f;
+    [SerializeField] float damagePerShot = 10f;
+    [SerializeField] float secondsBetweenShots = 0.5f;
+    [SerializeField] GameObject projectileToUse;
+    [SerializeField] GameObject projectileSocket;
+
+    public bool isAttacking = false;
 
     private float currentHealthPoints = 100f;
     private ThirdPersonCharacter thirdPersonCharacter = null;
     private AICharacterControl aiCharacterControl = null;
     private GameObject player = null;
-    private Vector3 startingPosition;
-
-    private void Start()
-    {
-        thirdPersonCharacter = GetComponent<ThirdPersonCharacter>();
-        aiCharacterControl = GetComponent<AICharacterControl>();
-        startingPosition = transform.position;
-        player = GameObject.FindGameObjectWithTag("Player");
-
-
-    }
-
-    private void Update()
-    {
-
-        Vector3 playerPosition = player.transform.position;
-        Vector3 distanceFromPlayer = transform.position - playerPosition;
-
-        if (aiCharacterControl &&
-           Mathf.Abs(distanceFromPlayer.x) <= attackRadius &&
-           Mathf.Abs(distanceFromPlayer.y) <= attackRadius &&
-           Mathf.Abs(distanceFromPlayer.z) <= attackRadius)
-        {
-            print(gameObject.name + " attacking player");
-        }
- 
-
-        if (aiCharacterControl &&
-           Mathf.Abs(distanceFromPlayer.x) <= chaseRadius &&
-           Mathf.Abs(distanceFromPlayer.y) <= chaseRadius &&
-           Mathf.Abs(distanceFromPlayer.z) <= chaseRadius)
-        {
-            aiCharacterControl.SetTarget(player.transform);
-        }
-        else if (thirdPersonCharacter && aiCharacterControl)
-        {
-            aiCharacterControl.SetTarget(null);
-            aiCharacterControl.agent.SetDestination(startingPosition);
-        }
-
-    }
-
+    private Vector3 startingPosition; 
+   
     public void TakeDamage(float damage)
     {
         currentHealthPoints = Mathf.Clamp(currentHealthPoints - damage, 0f, maxHealthPoints);
@@ -74,6 +40,49 @@ public class Enemy : MonoBehaviour, IDamagable {
         {
             return currentHealthPoints / maxHealthPoints;
         }
+    }
+
+    private void Start()
+    {
+        thirdPersonCharacter = GetComponent<ThirdPersonCharacter>();
+        aiCharacterControl = GetComponent<AICharacterControl>();
+        startingPosition = transform.position;
+        player = GameObject.FindGameObjectWithTag("Player");
+
+
+    }
+
+    private void Update()
+    {
+        float distanceToPlayer = Vector3.Distance(player.transform.position, transform.position);
+        if (distanceToPlayer <= attackRadius && !isAttacking) 
+        {
+            isAttacking = true;
+            InvokeRepeating("SpawnProjectile", 0f, )
+        }
+
+        if (distanceToPlayer <= chaseRadius)
+        {
+            aiCharacterControl.SetTarget(player.transform);
+        }
+        else
+        {
+            aiCharacterControl.SetTarget(null);
+            aiCharacterControl.agent.SetDestination(startingPosition);
+
+        }
+
+    }
+
+    void SpawnProjectile()
+    {
+        GameObject newProjectile = Instantiate(projectileToUse, projectileSocket.transform.position, Quaternion.identity);
+        Projectile projectileComponent = newProjectile.GetComponent<Projectile>();
+        projectileComponent.damageCaused = damagePerShot;
+
+        Vector3 unitVectorToPlayer = (player.transform.position - projectileSocket.transform.position).normalized;
+        float projectileSpeed = projectileComponent.projectileSpeed;
+        newProjectile.GetComponent<Rigidbody>().velocity = unitVectorToPlayer * projectileSpeed;
     }
 
     private void OnDrawGizmos()
